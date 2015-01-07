@@ -29,7 +29,13 @@ def connect():
     objects.remove(_set)
     mesh = objects[0]
     
-    _set.forCache.disconnect()
-    _set.forCache.connect(mesh.forCache)
+    try:
+        _set.forCache.disconnect()
+        _set.forCache.connect(mesh.forCache)
+    except Exception as ex:
+        pc.confirmDialog(title='Error', message=str(ex), button='Ok')
+        return
+    
+    pc.inViewMessage(amg='<hl>Objects connected successfully</hl>', pos='midCenter', fade=True )
     
     appUsageApp.updateDatabase('ObjectsConnect')
