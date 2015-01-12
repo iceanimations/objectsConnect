@@ -5,6 +5,9 @@ Created on Jan 7, 2015
 '''
 import pymel.core as pc
 import appUsageApp
+import msgBox
+import qtify_maya_window as qtfy
+from PyQt4.QtGui import QMessageBox
 
 def connect():
     objects = pc.ls(sl=True)
@@ -28,6 +31,12 @@ def connect():
     
     objects.remove(_set)
     mesh = objects[0]
+    
+    if pc.polyEvaluate(_set, f=True) != pc.polyEvaluate(mesh, f=True):
+        msgBox.showMessage(qtfy.getMayaWindow(), title='Compatibility Error',
+                           msg='Selected objects are not compatible',
+                           icon=QMessageBox.Information)
+        return
     
     try:
         _set.forCache.disconnect()
