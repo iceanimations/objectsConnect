@@ -5,9 +5,9 @@ Created on Jan 7, 2015
 '''
 import pymel.core as pc
 import appUsageApp
-import msgBox
 import qtify_maya_window as qtfy
 from PyQt4.QtGui import QMessageBox
+import msgBox
 
 def connect():
     objects = pc.ls(sl=True)
