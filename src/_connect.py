@@ -175,8 +175,6 @@ class LD(Form, Base):
             return
         
         pc.inViewMessage(amg='<hl>LD added successfully</hl>', pos='midCenter', fade=True )
-        
-        self.close()
     
     def getPath(self):
         path = self.pathBox.text()
