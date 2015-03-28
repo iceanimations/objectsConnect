@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>916</width>
-    <height>119</height>
+    <width>915</width>
+    <height>116</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -147,13 +147,26 @@
      <string>LD column</string>
     </property>
    </widget>
+   <widget class="QCheckBox" name="updateButton">
+    <property name="geometry">
+     <rect>
+      <x>330</x>
+      <y>52</y>
+      <width>101</width>
+      <height>18</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Update Existing</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>916</width>
+     <width>915</width>
      <height>22</height>
     </rect>
    </property>
@@ -238,6 +251,22 @@
     </hint>
     <hint type="destinationlabel">
      <x>237</x>
+     <y>82</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>batchButton</sender>
+   <signal>toggled(bool)</signal>
+   <receiver>updateButton</receiver>
+   <slot>setVisible(bool)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>41</x>
+     <y>81</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>367</x>
      <y>82</y>
     </hint>
    </hints>

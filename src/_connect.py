@@ -37,6 +37,7 @@ class LD(Form, Base):
         
         self.logFile = None
         
+        self.updateButton.hide()
         self.l1.hide()
         self.l2.hide()
         self.rigColumnBox.hide()
@@ -55,8 +56,9 @@ class LD(Form, Base):
         else: self.label.setText('LD path:')
         
     def setPath(self):
+        fileFilter = '*.csv' if self.batchButton.isChecked() else '*.ma *.mb'
         filename = QFileDialog.getOpenFileName(self, 'Select File',
-                                               '', '*.ma *.mb')
+                                               '', fileFilter)
         if filename:
             self.pathBox.setText(filename)
         
@@ -76,6 +78,13 @@ class LD(Form, Base):
             os.mkdir(directory)
         cmds.file(osp.join(directory, osp.basename(path)), ea=True, f=True, type=cmds.file(q=True, type=True)[0])
         
+    def isBackup(self, path):
+        directory = osp.dirname(path)
+        directory = osp.join(directory, __backup_directory_name__)
+        if osp.exists(directory):
+            return True
+        return False
+        
     def addBatch(self):
         self.logFile = open(__log_file_path__, 'w')
         try:
@@ -94,6 +103,9 @@ class LD(Form, Base):
                                      icon=QMessageBox.Information)
                     return
                 if rig:
+                    if not self.updateButton.isChecked():
+                        if self.isBackup(rig):
+                            continue
                     if osp.exists(rig):
                         if ld:
                             if osp.exists(ld):
@@ -107,7 +119,7 @@ class LD(Form, Base):
                                             pc.addAttr(node, shortName='forCache', longName='forCache', niceName='LD', dt='string')
                                         node.forCache.set(ld)
                                         #cmds.file(rename='D:/shot_test/file'+str(count)+osp.splitext(cmds.file(q=True, type=True)[0])[-1])
-                                        cmds.file(save=True, f=True, type=cmds.file(q=True, type=True)[0])
+                                        cmds.file(save=True, f=True, type=qutil.getFileType())
                                         count += 1
                                         flag = True
                                         break
