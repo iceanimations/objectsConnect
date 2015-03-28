@@ -113,7 +113,7 @@ class LD(Form, Base):
                                 self.createBackup(rig)
                                 flag = False
                                 for node in pc.ls(et=pc.nt.ObjectSet):
-                                    if node.name().endswith('_geo_set'):
+                                    if 'geo_set' in node.name().lower():
                                         print '---> Adding: '+ rig +' >> '+ ld
                                         if not pc.hasAttr(node, 'forCache'):
                                             pc.addAttr(node, shortName='forCache', longName='forCache', niceName='LD', dt='string')
