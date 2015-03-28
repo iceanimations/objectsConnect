@@ -103,10 +103,10 @@ class LD(Form, Base):
                                      icon=QMessageBox.Information)
                     return
                 if rig:
-                    if not self.updateButton.isChecked():
-                        if self.isBackup(rig):
-                            continue
                     if osp.exists(rig):
+                        if not self.updateButton.isChecked():
+                            if self.isBackup(rig):
+                                continue
                         if ld:
                             if osp.exists(ld):
                                 cmds.file(rig, o=True, f=True, prompt=False)
